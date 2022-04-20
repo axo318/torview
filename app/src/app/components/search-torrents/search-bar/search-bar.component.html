@@ -1,0 +1,14 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Movie name</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Avatar"
+      name= "search"
+      [(ngModel)]= "searchWord"
+    />
+    <button mat-icon-button matSuffix color="primary" aria-label="search-button" (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
