@@ -1,3 +1,18 @@
-<app-search-bar (searchCriteria)="searchTorrents($event)"></app-search-bar>
-<br>
-{{currentSearchTerm}}
+
+<torrent-search-bar class="centered" (searchCriteria)="searchTorrents($event)"></torrent-search-bar>
+
+<div class="centered overflow-hidden">
+  <div class="block_container">
+
+    <h3> Results for: <b>{{currentSearchTerm}}</b> </h3>
+
+    <mat-list *ngFor="let result of exampleResults">
+      <torrent-result [result]="result"></torrent-result>
+    </mat-list>
+
+<!--    <mat-card class="container" fxLayout="row" fxLayoutWrap *ngFor="let result of exampleResults">-->
+<!--      <torrent-result [result]="result"></torrent-result>-->
+<!--    </mat-card>-->
+
+  </div>
+</div>
