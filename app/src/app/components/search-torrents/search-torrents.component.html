@@ -6,13 +6,9 @@
 
     <h3> Results for: <b>{{currentSearchTerm}}</b> </h3>
 
-    <mat-list *ngFor="let result of exampleResults">
+    <mat-list *ngFor="let result of torrentSearchResults">
       <torrent-result [result]="result"></torrent-result>
     </mat-list>
-
-<!--    <mat-card class="container" fxLayout="row" fxLayoutWrap *ngFor="let result of exampleResults">-->
-<!--      <torrent-result [result]="result"></torrent-result>-->
-<!--    </mat-card>-->
 
   </div>
 </div>

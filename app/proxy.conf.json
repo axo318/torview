@@ -1,0 +1,11 @@
+{
+  "/torrent-api/*": {
+    "target": "https://apibay.org/q.php",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/torrent-api/": ""
+    }
+  }
+}

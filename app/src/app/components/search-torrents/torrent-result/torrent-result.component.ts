@@ -6,7 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./torrent-result.component.scss']
 })
 export class TorrentResultComponent {
-
   @Input() result: any;
-
 }

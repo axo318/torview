@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TorrentSearchService } from "../../services/torrent-search/torrent-search.service";
+import { TorrentSearchResult } from "../../services/torrent-search/torrent-search-result";
 
 @Component({
   selector: 'app-search-torrents',
@@ -7,30 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchTorrentsComponent implements OnInit {
   currentSearchTerm: String = '';
+  torrentSearchResults: TorrentSearchResult[] = [];
 
-  exampleResults = [
-    {name: "bobbyyysdy.sdsfsdfsdfsdf.1080p.bluraybobbyyysdy.sdsfsdfsdfsdf.108=ayfsdf.1080p.bluray", year: 2022},
-    {name: "rob", year: 2012},
-    {name: "chum", year: 2011},
-    {name: "corgi", year: 1999},
-    {name: "rob", year: 2012},
-    {name: "chum", year: 2011},
-    {name: "corgi", year: 1999},
-    {name: "rob", year: 2012},
-    {name: "chum", year: 2011},
-    {name: "corgi", year: 1999},
-  ];
-
-  constructor() { }
+  constructor(
+    private torrentSearchService: TorrentSearchService
+  ) {}
 
   ngOnInit(): void {
   }
 
   searchTorrents(searchQuery: String) {
     this.currentSearchTerm = searchQuery;
-    this.exampleResults = this.exampleResults.map(res => {
-      return {...res, name: `${searchQuery}--${res.name}`}
-    });
+    this.torrentSearchService.searchTorrents(searchQuery.toString()).subscribe(results => {
+      this.torrentSearchResults = results;
+    })
   }
 
 
