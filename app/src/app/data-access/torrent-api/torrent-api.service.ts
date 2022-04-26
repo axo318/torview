@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { TorrentApiResult } from "./torrent-api-result";
 import { Observable } from "rxjs";
+import { TorrentApiResult } from "./torrent-api-result";
+import { environment } from "../../../environments/environment";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TorrentApiService {
-  baseUrl = '/torrent-api/';
+  baseUrl = environment.torrentApiUrl;
 
   constructor(
     private httpClient: HttpClient,
