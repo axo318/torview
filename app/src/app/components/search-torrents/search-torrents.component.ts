@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TorrentSearchService } from "../../services/torrent-search/torrent-search.service";
-import { TorrentSearchResult } from "../../services/torrent-search/torrent-search-result";
+import { TorrentResult } from "../../services/torrent-search/torrent-result";
 
 @Component({
   selector: 'app-search-torrents',
@@ -9,7 +9,7 @@ import { TorrentSearchResult } from "../../services/torrent-search/torrent-searc
 })
 export class SearchTorrentsComponent implements OnInit {
   currentSearchTerm: String = '';
-  torrentSearchResults: TorrentSearchResult[] = [];
+  torrentSearchResults: TorrentResult[] = [];
 
   constructor(
     private torrentSearchService: TorrentSearchService

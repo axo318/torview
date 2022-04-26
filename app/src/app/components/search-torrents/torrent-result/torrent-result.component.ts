@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'torrent-result',
@@ -7,4 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class TorrentResultComponent {
   @Input() result: any;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+  ) {}
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
 }

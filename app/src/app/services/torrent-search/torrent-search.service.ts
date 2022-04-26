@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
-import { TorrentSearchResult } from './torrent-search-result';
+import { map, Observable, take } from 'rxjs';
+import { TorrentApiService } from "../../data-access/torrent-api/torrent-api.service";
+import { TorrentApiResult } from "../../data-access/torrent-api/torrent-api-result";
+import { TorrentResult } from "./torrent-result";
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,37 @@ import { TorrentSearchResult } from './torrent-search-result';
 export class TorrentSearchService {
 
   constructor(
-    private httpClient: HttpClient
+    private torrentApiService: TorrentApiService,
   ) {}
 
-  searchTorrents(searchTerm: string): Observable<TorrentSearchResult[]> {
-    let queryParams = new HttpParams();
-    queryParams = queryParams.append("q", searchTerm);
-    queryParams = queryParams.append("cat", 200);
-
-    return this.httpClient.get<TorrentSearchResult[]>('/torrent-api/', {
-      params: queryParams,
-    });
+  searchTorrents(searchTerm: string): Observable<TorrentResult[]> {
+    return this.torrentApiService.searchTorrentsWithKeyword(searchTerm)
+      .pipe(
+        take(1),
+        map(apiResults => apiResults.map(this.toTorrentResult))
+      )
   }
 
+  private toTorrentResult(torrentApiResult: TorrentApiResult): TorrentResult {
+    return {
+      id: torrentApiResult.id,
+      name: torrentApiResult.name,
+      torrentUrl: TorrentSearchService.formatLink(torrentApiResult.info_hash),
+      seeders: torrentApiResult.seeders,
+      leechers: torrentApiResult.leechers,
+      size: TorrentSearchService.formatSize(torrentApiResult.size),
+      numFiles: torrentApiResult.num_files,
+    } as TorrentResult;
+  }
+
+  private static formatSize(stringSizeInB: string): string {
+    let sizeInGb = (parseInt(stringSizeInB) / (1073741824)).toString();    // Turn to GiB
+    let sizeInGbFormatted = +parseFloat(sizeInGb).toFixed(2);
+    return `${sizeInGbFormatted} GiB`;
+  }
+
+  private static formatLink(infoHash: string): string {
+    return `magnet:?xt=urn:btih:${infoHash}`;
+  }
 
 }

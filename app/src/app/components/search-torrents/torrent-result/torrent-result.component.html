@@ -1,4 +1,14 @@
-<mat-card>
-  <mat-card-title>{{result.name}}</mat-card-title>
-  <mat-card-subtitle>{{result.id}}</mat-card-subtitle>
-</mat-card>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{result.name}}
+    </mat-panel-title>
+    <mat-panel-description class="right-aligned">
+      Size: {{result.size}}
+      Seeders: {{result.seeders}}
+      Leechers: {{result.leechers}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  Torrent Link: <a [href]="sanitize(result.torrentUrl)">{{result.torrentUrl}}</a>
+</mat-expansion-panel>
+

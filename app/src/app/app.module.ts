@@ -16,6 +16,7 @@ import { ExampleComponent } from './example/example.component';
 import { SearchTorrentsComponent } from './components/search-torrents/search-torrents.component';
 import { SearchBarComponent } from './components/search-torrents/search-bar/search-bar.component';
 import { TorrentResultComponent } from './components/search-torrents/torrent-result/torrent-result.component';
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TorrentResultComponent } from './components/search-torrents/torrent-res
     MatCardModule,
     MatListModule,
     HttpClientModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
